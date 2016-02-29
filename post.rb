@@ -1,16 +1,25 @@
 class Post
 
+  def self.post_types
+    [Memo, Link, Task]
+  end
+
+  def self.create(type_index)
+    return post_types[type_index].new
+
+  end
+
   def initialize
     @created_at = Time.now
     @text = nil
   end
 
-  def read_from_console         #   абстрактный метод реализуется в дочерних классах
+  def read_from_console #   абстрактный метод реализуется в дочерних классах
     # чтение записей, введённых пользователем с консоли
     # todo
   end
 
-  def to_strings                # абстрактный метод реализуется в дочерних классах
+  def to_strings # абстрактный метод реализуется в дочерних классах
     # todo
   end
 
@@ -25,7 +34,7 @@ class Post
     file.close
   end
 
-  def file_path             # не абстрактный метод
+  def file_path # не абстрактный метод
     current_path = File.dirname(__FILE__)
 
     file_name = @created_at.strftime("#{self.class.name} %Y-%m-%d_%H-%M-%S.txt")
