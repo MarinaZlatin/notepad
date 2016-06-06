@@ -10,7 +10,7 @@ class Link < Post   #  объявление дочернего класса, р�
     puts "Address of link"
     @url = STDIN.gets.chomp
 
-    puts "Description jf link"
+    puts "Description of link"
     @text = STDIN.gets.chomp
 
   end
@@ -21,4 +21,18 @@ class Link < Post   #  объявление дочернего класса, р�
     return [@url, @text, time_string]
   end
 
+  def  to_db_hash
+    return super.merge(
+        {
+            'text' => @text,
+            'url' => @url
+        }
+    )
+  end
+
+  def load_data(data_hash)
+    super(data_hash) # обращение к родительскому методу
+
+    @url = data_hash['url']
+  end
 end
